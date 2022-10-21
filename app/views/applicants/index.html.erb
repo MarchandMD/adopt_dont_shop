@@ -1,0 +1,18 @@
+<h1>applicants#index</h1>
+<h3>Click Applicant name to view thier application</h3>
+<div class="row">
+  <div class="col">
+      <table class='table'>
+        <tr>
+          <th>Applicant Name</th>
+          <th> # of applications</th>
+        </tr>
+    <% @applicants.each do |applicant| %>
+        <tr>
+          <td><%= applicant.name %></td>
+          <td> none at this time</td>
+        </tr>
+    <% end %>
+      </table>
+  </div>
+</div>
