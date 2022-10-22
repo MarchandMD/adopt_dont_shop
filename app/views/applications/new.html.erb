@@ -3,10 +3,23 @@
     <h1>applications#new</h1>
   </div>
 </div>
+<% if @application.errors.any? %>
+<div class="row">
+  <div class="col">
+    <%= pluralize(@application.errors.count, "error") %> prohitied this application from being saved:
+    <ul>
+      <% @application.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+
+    </ul>
+  </div>
+</div>
+ <% end %>
 <div class="row">
   <div class="col-6">
     <table class="table">
-      <%= form_with(url: "/applications", method: :post, local: true) do |form| %>
+      <%= form_with(scope: :applications, url: "/applications", method: :post, local: true) do |form| %>
         <tr>
           <td><%= form.label :name %></td>
           <td><%= form.text_field :name %></td>
