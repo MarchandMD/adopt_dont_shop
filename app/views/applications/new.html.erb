@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col">
+    <h1>applications#new</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <table class="table">
+      <%= form_with(url: "/applications", method: :post, local: true) do |form| %>
+        <tr>
+          <td><%= form.label :name %></td>
+          <td><%= form.text_field :name %></td>
+        </tr>
+        <tr>
+          <td><%= form.label :address %></td>
+          <td><%= form.text_field :address %></td>
+        </tr>
+        <tr>
+          <td><%= form.label :city %></td>
+          <td><%= form.text_field :city %></td>
+        </tr>
+        <tr>
+          <td><%= form.label :state %></td>
+          <td><%= form.text_field :state %></td>
+        </tr>
+        <tr>
+          <td><%= form.label :zip_code, "Zip Code" %></td>
+          <td><%= form.text_field :zip_code %></td>
+        </tr>
+        <tr>
+          <td><%= form.label :description %></td>
+          <td><%= form.text_area :description %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= form.submit "submit", class: 'btn btn-primary' %> </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
