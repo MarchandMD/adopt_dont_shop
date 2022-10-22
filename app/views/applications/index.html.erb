@@ -1,1 +1,7 @@
 <h1>applications#index</h1>
+<table class='table'>
+  <tr><th>application</th></tr>
+  <% @applications.each do |application| %>
+  <tr><td><%=link_to application.name, "/applications/#{application.id}" %></td></tr>
+  <% end  %>
+</table>

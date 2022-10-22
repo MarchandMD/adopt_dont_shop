@@ -32,6 +32,10 @@
           <td><%= form.text_area :description %></td>
         </tr>
         <tr>
+          <td><%= form.label :status %></td>
+          <td><%= form.select(:status, options_for_select(['In Progress', 'Pending', 'Accepted', 'Rejected'])) %></td>
+        </tr>
+        <tr>
           <td></td>
           <td><%= form.submit "submit", class: 'btn btn-primary' %> </td>
         </tr>
