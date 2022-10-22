@@ -62,3 +62,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "bootstrap", "~> 5.2"
 
 gem "jquery-rails", "~> 4.5"
+
+gem "faker", "~> 2.23", :groups => [:development, :test]

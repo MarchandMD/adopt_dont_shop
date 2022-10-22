@@ -45,11 +45,11 @@ RSpec.describe 'application' do
     expect(page).to have_link("Veterinary Offices")
   end
 
-  it 'displays a link to all applicants' do
+  it 'displays a link to all applications' do
     visit '/'
-    expect(page).to have_link("Applicants")
-    click_link('Applicants')
-    expect(current_path).to eq('/applicants')
-    expect(page).to have_content('applicants#index')
+    expect(page).to have_link("Applications")
+    click_link('Applications')
+    expect(current_path).to eq('/applications')
+    expect(page).to have_content('applications#index')
   end
 end

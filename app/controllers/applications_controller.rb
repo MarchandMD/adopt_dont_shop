@@ -1,5 +1,9 @@
 class ApplicationsController < ApplicationController
 
+  def index
+    @applications = Application.all
+  end
+
   def show
     @application = Application.find(params[:applicant_id])
   end
@@ -10,7 +14,7 @@ class ApplicationsController < ApplicationController
   def create
     applicant = Applicant.create!(applicant_params)
     applicant.applications.create!(application_params)
-    
+
     redirect_to "/applications/#{Application.last.id}"
   end
 
