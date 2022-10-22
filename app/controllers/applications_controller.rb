@@ -9,18 +9,23 @@ class ApplicationsController < ApplicationController
   end
 
   def new
+    @application = Application.new
   end
 
   def create
-    Application.create!(application_params)
+    @application = Application.new(applications_params)
 
-    redirect_to "/applications/#{Application.last.id}"
+    if @application.save
+      redirect_to "/applications/#{Application.last.id}"
+    else
+      render 'new'
+    end
   end
 
   private
 
-  def application_params
-    params.permit(:name, :address, :city, :state, :zip_code, :description, :status, :submitted)
+  def applications_params
+    params.require(:applications).permit(:name, :address, :city, :state, :zip_code, :description, :status, :submitted)
   end
 
 end
