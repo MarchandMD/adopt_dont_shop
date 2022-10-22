@@ -6,7 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Applicants.destroy_all
+Applicant.destroy_all
+Application.destroy_all
 
-applicant_1 = Applicant.create!(name: 'foo bar')
-applicant_2 = Applicant.create!(name: 'baz foo')
+applicant_1 = Applicant.create!(name: 'foo bar', address: '1 main st', city: 'denver', state: 'co', zip_code: 12345)
+applicant_2 = Applicant.create!(name: 'baz foo', address: '10 downing st', city: 'london', state: 'co', zip_code: 54321)
+applicant_1.applications.create!(status: 'in progress', submitted: false, description: 'suitable')
+applicant_2.applications.create!(status: 'pending', submitted: false, description: 'animal lover')
