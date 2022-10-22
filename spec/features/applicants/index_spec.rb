@@ -8,5 +8,11 @@ RSpec.describe 'Applicants' do
       visit '/applicants'
       expect(page).to have_content(applicant_1.name)
     end
+
+    it 'has links to an applicants application' do
+      visit '/applicants'
+      expect(page).to have_link(applicant_1.name)
+      first(:link, applicant_1.name).click
+    end
   end
 end
