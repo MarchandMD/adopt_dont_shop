@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col">
+    <h1>Applications for <%= @applicant.name %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table">
+      <tr>
+        <th>Applications</th>
+      </tr>
+      <% @applicant.applications.each do |application| %>
+      <tr> <%= application.status %></tr>
+      <% end %>
+    </table>
+  </div>
+</div>
