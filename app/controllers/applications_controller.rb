@@ -5,7 +5,12 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    @application = Application.find(params[:applicant_id])
+    @application = Application.find(params[:id])
+
+    if params.include?(:search)
+      @pets = Pet.exact_match(params[:search])
+    end
+
   end
 
   def new
@@ -22,10 +27,27 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def update
+    @application = Application.find(params[:id])
+
+    if params[:status] == 'Pending'
+      @application.update(status: params[:status])
+      @pending_adoptions = @application.pets
+    else
+      @application.pets << Pet.where(name: params[:search])
+    end
+
+    redirect_to "/applications/#{@application.id}"
+  end
+
   private
 
   def applications_params
-    params.require(:applications).permit(:name, :address, :city, :state, :zip_code, :description, :status, :submitted)
+    params.require(:applications).permit(:name, :address, :city, :state, :zip_code, :description, :status, :submitted, :search)
+  end
+
+  def search_params
+    params.permit(:search)
   end
 
 end

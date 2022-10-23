@@ -1,13 +1,77 @@
 <h1>applications#show</h1>
-
 <div class="row">
   <div class="col d-flex flex-column">
-   <p> <%= @application.name %></p>
-   <p> <%= @application.address %></p>
-   <p> <%= @application.city %></p>
-   <p> <%= @application.state %></p>
-   <p> <%= @application.zip_code %></p>
-   <p> <%= @application.description %></p>
-   <p> <%= @application.status %></p>
+    <p> <%= @application.name %></p>
+    <p> <%= @application.address %></p>
+    <p> <%= @application.city %></p>
+    <p> <%= @application.state %></p>
+    <p> <%= @application.zip_code %></p>
+    <p> <%= @application.description %></p>
+    <p> <%= @application.status %></p>
   </div>
 </div>
+<% if @pending_adoptions == [] || @pending_adoptions.nil? %>
+  <div class="row flex-column">
+    <div class="col">
+      <h1>Add A Pet to this Application</h1>
+    </div>
+    <div class="col">
+      <%= form_with(url: "/applications/#{@application.id}", method: 'get', local: true)do |f| %>
+        <%= f.label :search %>
+        <%= f.text_field :search %>
+        <%= f.submit 'Search', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col">
+      <% @pending_adoptions.each do |pending_adoption| %>
+        <ul>
+          <li><%= pending_adoption.name %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-4">
+    <% if !@pets.nil? %>
+      <table class="table">
+        <% @pets.each do |pet| %>
+          <tr>
+            <td><%= pet.name %></td>
+            <td><%= button_to('Adopt this Pet', "/applications/#{@application.id}?search=#{pet.name}", method: :patch,  class: 'btn btn-primary') %></td>
+            <td> hello </td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
+<% if @application.pets == [] %>
+  <div class="row">
+    <div class="col">
+      <p>no pets for this application, at this time</p>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col">
+      <% @application.pets.each do |pet| %>
+        <p><%= pet.name %></p>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1>Submit My Application</h1>
+      <%= form_with(url: "/applications/#{@application.id}", method: :patch, local: true) do |f| %>
+        <%= f.label :description, 'Why......' %>
+        <%= f.text_area :description %>
+        <%= f.hidden_field(:status, value: 'Pending') %>
+        <%= f.submit 'Submit My Application' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
