@@ -3,7 +3,7 @@ class Pet < ApplicationRecord
   validates :age, presence: true, numericality: true
 
   belongs_to :shelter
-  
+
   has_many :application_pets
   has_many :applications, through: :application_pets
 
@@ -13,5 +13,9 @@ class Pet < ApplicationRecord
 
   def self.adoptable
     where(adoptable: true)
+  end
+
+  def self.exact_match(input = '')
+    where(name: input)
   end
 end

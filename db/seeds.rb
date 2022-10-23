@@ -7,7 +7,18 @@ require 'faker'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+ApplicationPet.destroy_all
 Application.destroy_all
+Pet.destroy_all
+Shelter.destroy_all
+VeterinaryOffice.destroy_all
+Veterinarian.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('applications')
+ActiveRecord::Base.connection.reset_pk_sequence!('pets')
+ActiveRecord::Base.connection.reset_pk_sequence!('shelters')
+ActiveRecord::Base.connection.reset_pk_sequence!('application_pets')
+ActiveRecord::Base.connection.reset_pk_sequence!('veterinarians')
+ActiveRecord::Base.connection.reset_pk_sequence!('veterinary_offices')
 
 5.times do
   Application.create!(name: Faker::Name.name,
@@ -18,4 +29,17 @@ Application.destroy_all
                       status: 'In progress',
                       submitted: false,
                       description: Faker::Lorem.sentence(word_count: 8))
+end
+
+shelter = Shelter.create!(foster_program: true,
+                name: 'Shelter 1',
+                city: 'anywhere',
+                rank: 1)
+
+10.times do
+  Pet.create!(adoptable: true,
+              age: Faker::Number.between(from: 1, to: 15),
+              breed: Faker::Creature::Dog.breed,
+              name: Faker::Creature::Dog.name,
+              shelter_id: shelter.id)
 end
