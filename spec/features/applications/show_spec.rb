@@ -79,6 +79,20 @@ RSpec.describe 'Applications' do
       expect(page).to have_content('fido')
     end
 
+    it 'is case insensitive when searching pets' do
+      visit "/applications/#{@application_1.id}"
+      fill_in "Search",	with: "fIdO"
+      click_button('Search')
+      expect(page).to have_content('fido')
+
+      visit "/applications/#{@application_1.id}"
+      fill_in "Search",	with: "fidO"
+      click_button('Search')
+      expect(page).to have_content('fido')
+
+    end
+
+
   end
 
 
