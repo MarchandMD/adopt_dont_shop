@@ -8,7 +8,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
 
     if params.include?(:search)
-      @pets = Pet.search(params[:search])
+      @pets = Pet.search(params[:search].downcase)
     end
 
   end
