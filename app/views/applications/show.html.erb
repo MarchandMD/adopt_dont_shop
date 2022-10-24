@@ -10,45 +10,7 @@
     <p> <%= @application.status %></p>
   </div>
 </div>
-<% if @pending_adoptions == [] || @pending_adoptions.nil? %>
-  <div class="row flex-column">
-    <div class="col">
-      <h1>Add A Pet to this Application</h1>
-    </div>
-    <div class="col">
-      <%= form_with(url: "/applications/#{@application.id}", method: 'get', local: true)do |f| %>
-        <%= f.label :search %>
-        <%= f.text_field :search %>
-        <%= f.submit 'Search', class: 'btn btn-primary' %>
-      <% end %>
-    </div>
-  </div>
-<% else %>
-  <div class="row">
-    <div class="col">
-      <% @pending_adoptions.each do |pending_adoption| %>
-        <ul>
-          <li><%= pending_adoption.name %></li>
-        </ul>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-<div class="row">
-  <div class="col-4">
-    <% if !@pets.nil? %>
-      <table class="table">
-        <% @pets.each do |pet| %>
-          <tr>
-            <td><%= pet.name %></td>
-            <td><%= button_to('Adopt this Pet', "/applications/#{@application.id}?search=#{pet.name}", method: :patch,  class: 'btn btn-primary') %></td>
-            <td> hello </td>
-          </tr>
-        <% end %>
-      </table>
-    <% end %>
-  </div>
-</div>
+
 <% if @application.pets == [] %>
   <div class="row">
     <div class="col">
@@ -63,6 +25,42 @@
       <% end %>
     </div>
   </div>
+<% end %>
+
+
+<% if @application.status != 'Pending' %>
+  <div class="row flex-column">
+    <div class="col">
+      <h1>Add A Pet to this Application</h1>
+    </div>
+    <div class="col">
+      <%= form_with(url: "/applications/#{@application.id}", method: 'get', local: true)do |f| %>
+        <%= f.label :search %>
+        <%= f.text_field :search %>
+        <%= f.submit 'Search', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+
+<div class="row">
+  <div class="col-4">
+    <% if !@pets.nil? %>
+      <table class="table">
+        <% @pets.each do |pet| %>
+          <tr>
+            <td><%= pet.name %></td>
+            <td><%= button_to('Adopt this Pet', "/applications/#{@application.id}?search=#{pet.name}", method: :patch,  class: 'btn btn-primary') %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
+
+<% if @application.pets != [] && @application.status != 'Pending' %>
   <div class="row">
     <div class="col">
       <h1>Submit My Application</h1>
