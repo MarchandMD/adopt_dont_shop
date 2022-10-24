@@ -31,7 +31,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
 
     if params[:status] == 'Pending'
-      @application.update(status: params[:status])
+      @application.update(status: params[:status], description: params[:description])
       @pending_adoptions = @application.pets
     else
       @application.pets << Pet.where(name: params[:search])

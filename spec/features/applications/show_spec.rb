@@ -65,6 +65,12 @@ RSpec.describe 'Applications' do
       expect(page).not_to have_content('Add A Pet')
     end
 
+    it 'allows submission if a pet has been selected' do
+      visit "/applications/#{@application_1.id}"
+      expect(page).to have_content('no pets for this application, at this time')
+      expect(@application_1.pets).to eq([])
+      expect(page).not_to have_content('Submit My Application')
+    end
   end
 
 
