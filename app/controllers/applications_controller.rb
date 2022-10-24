@@ -8,7 +8,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
 
     if params.include?(:search)
-      @pets = Pet.exact_match(params[:search])
+      @pets = Pet.search(params[:search])
     end
 
   end
@@ -32,7 +32,6 @@ class ApplicationsController < ApplicationController
 
     if params[:status] == 'Pending'
       @application.update(status: params[:status], description: params[:description])
-      @pending_adoptions = @application.pets
     else
       @application.pets << Pet.where(name: params[:search])
     end

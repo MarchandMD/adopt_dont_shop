@@ -71,6 +71,14 @@ RSpec.describe 'Applications' do
       expect(@application_1.pets).to eq([])
       expect(page).not_to have_content('Submit My Application')
     end
+
+    it 'can find partial matches for pets searched' do
+      visit "/applications/#{@application_1.id}"
+      fill_in "Search",	with: "fid"
+      click_button 'Search'
+      expect(page).to have_content('fido')
+    end
+
   end
 
 
