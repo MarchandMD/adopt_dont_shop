@@ -20,8 +20,12 @@ RSpec.describe 'Adminapplications' do
       expect(page).to have_content('This pet has been approved for adoption')
     end
 
-    it 'has some behaviour' do
+    it 'can reject a pet for adoption' do
       visit "/admin/applications/#{@application.id}"
+      expect(page).to have_button('Reject this Application')
+      click_button('Reject this Application')
+      expect(current_path).to eq("/admin/applications/#{@application.id}")
+      expect(page).to have_content('This application has been rejected for adoption')
     end
 
 
