@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col">
-    <h1>All pets</h1>
+    <h1>Pets#index</h1>
   </div>
 </div>
 <div class="row">
@@ -12,12 +12,12 @@
     <% end %>
   </div>
   <div class="col-6">
-    <%= link_to 'Start an Application', 'applications/new' %>
+    <%= link_to 'Start an Application', 'applications/new', class: 'btn btn-primary' %>
   </div>
 </div>
-<div class="row">
-  <div class="col">
-    <% @pets.each do |pet| %>
+<div class="row justify-content-center">
+  <% @pets.each do |pet| %>
+    <div class="col-3 p-3 m-3 border border-1 shadow d-flex flex-column align-items-center">
       <h3><%= pet.name %></h3>
       <p>Age: <%= pet.age %></p>
       <p>Breed: <%= pet.breed %></p>
@@ -25,6 +25,6 @@
       <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
       <%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit" %>
       <%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

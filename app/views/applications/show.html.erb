@@ -52,7 +52,7 @@
         <% @pets.each do |pet| %>
           <tr>
             <td><%= pet.name %></td>
-            <td><%= button_to('Adopt this Pet', "/applications/#{@application.id}?search=#{pet.name}", method: :patch,  class: 'btn btn-primary') %></td>
+            <td><%= button_to('Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {search: pet.name}, class: 'btn btn-primary') %></td>
           </tr>
         <% end %>
       </table>
