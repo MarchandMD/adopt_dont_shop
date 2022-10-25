@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col">
+    <h1>AdminApplications#show</h1>
+  </div>
+</div>
+<div class="row">
+  <% @application.pets.each do |pet| %>
+    <div class="col-6 p-3">
+      <h2><%= pet.name %></h2>
+      <% if (pet.adoptable == true || pet.adoptable.nil?) && @application.status != 'Rejected' %>
+        <%= button_to 'Approve this Pet', "/admin/applications/#{@application.id}", method: :patch, params: { pet_id: pet.id, adoptable: false }, class: 'btn btn-primary m-2' %>
+        <%= button_to 'Reject this Application', "/admin/applications/#{@application.id}", method: :patch, params: {status: 'Rejected'}, class: 'btn btn-warning m-2' %>
+      <% else %>
+        <% if pet.adoptable == false %>
+          <p>This pet has been approved for adoption</p>
+        <% elsif @application.status == 'Rejected' %>
+          <p>This application has been rejected for adoption</p>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   patch '/applications/:id', to: 'applications#update'
   post '/applications', to: 'applications#create'
 
-  get '/admin/shelters', to: 'adminshelters#index'
+  get '/admin/applications', to: 'adminapplications#index'
+  get '/admin/applications/:id', to: 'adminapplications#show'
+  patch '/admin/applications/:id', to: 'adminapplications#update'
 
   get '/shelters', to: 'shelters#index'
   get '/shelters/new', to: 'shelters#new'
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
   get '/shelters/:id/edit', to: 'shelters#edit'
   patch '/shelters/:id', to: 'shelters#update'
   delete '/shelters/:id', to: 'shelters#destroy'
+
+  get '/admin/shelters', to: 'adminshelters#index'
 
   get '/pets', to: 'pets#index'
   get '/pets/:id', to: 'pets#show'
