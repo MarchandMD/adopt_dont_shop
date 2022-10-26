@@ -11,7 +11,7 @@ RSpec.describe 'Applications' do
       fill_in "Zip Code", with: "23456"
       fill_in "Description", with: "because"
       click_button("submit")
-      expect(current_path).to eq("/applications/")
+      expect(page).to have_content("Fuzz Sqrl")
     end
   end
 end
