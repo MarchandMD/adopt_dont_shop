@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get '/admin/shelters', to: 'adminshelters#index'
 
   get '/pets', to: 'pets#index'
+  get '/pets/new', to: 'pets#new'
   get '/pets/:id', to: 'pets#show'
   get '/pets/:id/edit', to: 'pets#edit'
   patch '/pets/:id', to: 'pets#update'

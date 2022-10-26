@@ -5,16 +5,17 @@ class AdminapplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    @application_pets = ApplicationPet.where(application_id: @application.id)
   end
 
   def update
     @application = Application.find(params[:id])
+    @application_pet = ApplicationPet.find_by(pet_id: params[:pet_id], application_id: params[:id])
 
-    if params.include?(:pet_id)
-      @pet = Pet.find(params[:pet_id])
-      @pet.update(adoption_params)
-    elsif params.include?(:status)
-      @application.update(status_params)
+    if params[:status] == "1"
+      @application_pet.approved!
+    elsif params[:status] == "2"
+      @application_pet.rejected!
     end
 
     redirect_to "/admin/applications/#{@application.id}"
