@@ -4,19 +4,14 @@
   </div>
 </div>
 <div class="row">
-  <% @application.pets.each do |pet| %>
-    <div class="col-6 p-3">
-      <h2><%= pet.name %></h2>
-      <% if (pet.adoptable == true || pet.adoptable.nil?) && @application.status != 'Rejected' %>
-        <%= button_to 'Approve this Pet', "/admin/applications/#{@application.id}", method: :patch, params: { pet_id: pet.id, adoptable: false }, class: 'btn btn-primary m-2' %>
-        <%= button_to 'Reject this Application', "/admin/applications/#{@application.id}", method: :patch, params: {status: 'Rejected'}, class: 'btn btn-warning m-2' %>
-      <% else %>
-        <% if pet.adoptable == false %>
-          <p>This pet has been approved for adoption</p>
-        <% elsif @application.status == 'Rejected' %>
-          <p>This application has been rejected for adoption</p>
-        <% end %>
+  <div class="col">
+    <% @application_pets.each do |application_pet| %>
+      <p>current status: <%= application_pet.status %></p>
+      <p>animal name: <%= Pet.find(application_pet.pet_id).name %></p>
+      <% if application_pet.pending? %>
+        <%= button_to 'approve this pet', "/admin/applications/#{application_pet.application_id}", method: :patch, params: { pet_id: application_pet.pet_id, status: 1 }, class: 'btn btn-success m-2' %>
+        <%= button_to 'reject this pet', "/admin/applications/#{application_pet.application_id}", method: :patch, params: { pet_id: application_pet.pet_id, status: 2 }, class: 'btn btn-danger m-2' %>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>

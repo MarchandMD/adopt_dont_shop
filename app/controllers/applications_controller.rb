@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
     if @application.save
       redirect_to "/applications/#{Application.last.id}"
     else
-      render 'new'
+      render :new
     end
   end
 
