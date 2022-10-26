@@ -66,3 +66,5 @@ gem "jquery-rails", "~> 4.5"
 gem "faker", "~> 2.23", :groups => [:development, :test]
 
 gem "pry-rails", "~> 0.3.9", :groups => [:development, :test]
+
+
