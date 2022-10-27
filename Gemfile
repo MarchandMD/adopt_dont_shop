@@ -63,7 +63,7 @@ gem "bootstrap", "~> 5.2"
 
 gem "jquery-rails", "~> 4.5"
 
-gem "faker", "~> 2.23", :groups => [:development, :test]
+gem "faker", "~> 2.23", :groups => [:development, :test, :production]
 
 gem "pry-rails", "~> 0.3.9", :groups => [:development, :test]
 
