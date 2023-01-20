@@ -7,4 +7,8 @@ class ApplicationPet < ApplicationRecord
     approved: 1,
     rejected: 2
   }
+
+  def find_pet_name
+    pet.name
+  end
 end
