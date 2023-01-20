@@ -21,7 +21,8 @@
 </div>
 <div class="row">
   <% @applications.each do |app| %>
-    <% app.pets.uniq.each do |pet| %>
+  <%# AR method would be `distinct`%>
+    <% app.find_distinct.each do |pet| %>
       <div class="col">
         <h3><%= pet.shelter_name %></h3>
       </div>
